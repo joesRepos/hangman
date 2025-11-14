@@ -30,16 +30,27 @@ public class Hangman {
         String answer = getAnswer();
         String maskedAnswer = maskAnswer(answer);
         String guess = "";
+        String wrongGuesses = "";
         while (!guess.equals("EXIT")) {
             System.out.println(maskedAnswer);
+            if (wrongGuesses.length() > 0) {
+                System.out.println("Wrong guesses: " + wrongGuesses);
+            }
             guess = scanner.nextLine();
-
             if (guess.length() > 1 && guess.equals(answer)) {
                 System.out.println("WINNER");
                 return;
             }
             else if (answer.contains(guess)) {
                 maskedAnswer = makeGuess(maskedAnswer, answer, guess.charAt(0));
+            }
+            else if (!wrongGuesses.contains(guess)) {
+                if (wrongGuesses.length() > 0) {
+                    wrongGuesses += ", " + guess;
+                }
+                else {
+                    wrongGuesses = guess;
+                }
             }
         }
     }
