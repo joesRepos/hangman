@@ -31,6 +31,7 @@ public class Hangman {
         String maskedAnswer = maskAnswer(answer);
         String guess = "";
         String wrongGuesses = "";
+        int lostLives = 0;
         while (!guess.equals("EXIT")) {
             System.out.println(maskedAnswer);
             if (wrongGuesses.length() > 0) {
@@ -45,6 +46,11 @@ public class Hangman {
                 maskedAnswer = makeGuess(maskedAnswer, answer, guess.charAt(0));
             }
             else if (!wrongGuesses.contains(guess)) {
+                lostLives++;
+                if (lostLives > 6) {
+                    System.out.println("GAME OVER");
+                    return;
+                }
                 if (wrongGuesses.length() > 0) {
                     wrongGuesses += ", " + guess;
                 }
