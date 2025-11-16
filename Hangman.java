@@ -49,8 +49,16 @@ public class Hangman {
                 lostLives++;
                 if (lostLives > 6) {
                     System.out.println("GAME OVER");
+                    System.out.println("_______\r\n" + 
+                                                "|/    |\r\n" + 
+                                                "|     0\r\n" + 
+                                                "|    -+-\r\n" + 
+                                                "|    / \\\r\n" + 
+                                                "|\r\n" + 
+                                                "-------");
                     return;
                 }
+                displayGallows(lostLives);
                 if (wrongGuesses.length() > 0) {
                     wrongGuesses += ", " + guess;
                 }
@@ -58,6 +66,64 @@ public class Hangman {
                     wrongGuesses = guess;
                 }
             }
+        }
+    }
+
+    public static void displayGallows(int stage) {
+        switch (stage) {
+            case 1:
+                System.out.println("_______\r\n" + 
+                                        "|/    |\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "-------");
+                break;
+            case 2:
+                System.out.println("_______\r\n" + 
+                                        "|/    |\r\n" + 
+                                        "|     0\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "-------");
+                break;
+            case 3:
+                System.out.println("_______\r\n" + 
+                                        "|/    |\r\n" + 
+                                        "|     0\r\n" + 
+                                        "|     +\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "-------");
+                break;
+            case 4:
+                System.out.println("_______\r\n" + 
+                                        "|/    |\r\n" + 
+                                        "|     0\r\n" + 
+                                        "|    -+\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "-------");
+                break;
+            case 5:
+                System.out.println("_______\r\n" + 
+                                        "|/    |\r\n" + 
+                                        "|     0\r\n" + 
+                                        "|    -+-\r\n" + 
+                                        "|\r\n" + 
+                                        "|\r\n" + 
+                                        "-------");
+                break;
+            case 6:
+                System.out.println("_______\r\n" + 
+                                        "|/    |\r\n" + 
+                                        "|     0\r\n" + 
+                                        "|    -+-\r\n" + 
+                                        "|    / \r\n" + 
+                                        "|\r\n" + 
+                                        "-------");
         }
     }
 }
