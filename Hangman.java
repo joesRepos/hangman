@@ -1,4 +1,10 @@
 package hangman;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman {
@@ -7,9 +13,6 @@ public class Hangman {
         play();
     }  
      
-    public static String getAnswer() {
-        return "ANSWER";
-    }
 
     public static String maskAnswer(String answer) {
         return "_".repeat(answer.length());
@@ -22,6 +25,27 @@ public class Hangman {
             }
         }
         return maskedAnswer;
+    }
+
+    public static String getAnswer() {
+        List<String> words = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("hangman/wordList.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.startsWith(";") && !line.isEmpty()) {
+                    String[] parts = line.split(";");
+                    String word = parts[1];
+                    if (word.length() > 3) {
+                        words.add(word);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Random random = new Random();
+        return words.get(random.nextInt(words.size()));
     }
 
     public static void play() {
@@ -49,6 +73,7 @@ public class Hangman {
             }
             else if (!wrongGuesses.contains(guess)) {
                 System.out.println("WRONG");
+                System.out.println("The answer was " + answer);
                 lostLives++;
                 if (lostLives > 6) {
                     System.out.println("GAME OVER");
