@@ -13,11 +13,12 @@ public class Hangman {
         play();
     }  
      
-
+    // Hides the answer.
     public static String maskAnswer(String answer) {
         return "_".repeat(answer.length());
     } 
 
+    // Replaces the masked caharcters in the answer with the correct guess.
     public static String makeGuess(String maskedAnswer, String answer, char guess) {
         for (int i = 0; i < answer.length(); i++) {
             if (answer.charAt(i) == guess) {
@@ -27,6 +28,7 @@ public class Hangman {
         return maskedAnswer;
     }
 
+    // Gets a random word over 3 characters long from the CSV.
     public static String getAnswer() {
         List<String> words = new ArrayList<>();
 
@@ -48,6 +50,7 @@ public class Hangman {
         return words.get(random.nextInt(words.size()));
     }
 
+    // The game logic.
     public static void play() {
         System.out.println("Welcome to Hangman");
         Scanner scanner = new Scanner(System.in);
@@ -56,6 +59,8 @@ public class Hangman {
         String guess = "";
         String wrongGuesses = "";
         int lostLives = 0;
+
+        // Loops over the rounds.
         while (!guess.equals("EXIT")) {
             System.out.println("******************");
             System.out.println(maskedAnswer);
@@ -97,6 +102,7 @@ public class Hangman {
         }
     }
 
+    // Displays the gallows based on the stage of wrong answers.
     public static void displayGallows(int stage) {
         switch (stage) {
             case 1:
